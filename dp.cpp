@@ -6,6 +6,17 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
+int getMinChanges(string s1,string s2,int n , int m)
+{
+
+	int ret1,ret2,ret3;
+ 	if( n==0)return m;
+    	if( m==0 )return n;
+	if( s1[n]==s2[m])
+		return getMinChanges(s1,s2,n-1,m-1);
+	else 
+		return min(min(1+getMinChanges(s1,s2,n,m-1),1+getMinChanges(s1,s2,n-1,m)),1+getMinChanges(s1,s2,n-1,m-1));
+}
 unsigned long long int coinCount(int coins[],int amount,int size)
 {
 	unsigned long long int arr[amount+1][size];
@@ -52,4 +63,26 @@ int main() {
     buResult=bottomUpFib(n,buarr);
     cout<<tdResult<<" "<<buResult;
 
+}
+
+//delete from here 
+#include<iostream>
+
+#include<string>
+using namespace std;
+
+int main()
+ {
+	int tc,n,m;
+	cin>>tc;
+	string s1,s2;
+		while(tc>0)
+		{
+		    cin>>n>>m;
+			cin>>s1>>s2;
+
+			cout<<getMinChanges(s1,s2,n-1,m-1);
+		    tc--;
+		}
+	return 0;
 }
